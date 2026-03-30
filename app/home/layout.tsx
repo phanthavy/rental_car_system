@@ -1,12 +1,24 @@
 import Link from "next/link";
+import backgroundImg from "@/img/background.png";
+import Image from "next/image";
 
 export default function layout({ children }: { children: React.ReactNode }) {
   return (
-    <div className="flex flex-col text-white h-screen overflow-hidden">
+    <div className="flex flex-col text-white h-screen overflow-hidden ">
       <header>
-        <h1 className="text-2xl font-bold p-2 text-green-700">Auto & All About Mobility Life</h1>
+        <h1 className="text-2xl font-bold p-4 text-green-700">
+          Auto & All About Mobility Life
+        </h1>
       </header>
-      <main className="bg-gray-600 text-black flex flex-col flex-1 h-full overflow-hidden">
+      <main className="bg-gray-600 text-black flex flex-col flex-1 h-full overflow-hidden relative">
+        <Image
+          src={backgroundImg}
+          alt={""}
+          fill
+          quality={300}
+          className="object-cover"
+        />
+        <div className="absolute inset-0 bg-linear-to-b from-black/70 to-black/20"></div>
         {children}
       </main>
       <footer>
@@ -15,8 +27,8 @@ export default function layout({ children }: { children: React.ReactNode }) {
             AutoLaoCompany
           </h1>
 
-          <div className="px-4 gap-8 flex-1 text-black">
-            <div className="flex gap-8">
+          <div className="px-4 flex-1 text-black">
+            <div className="flex gap-15">
               <p>이용약관</p>
               <p>개인정보 처리방침​</p>
             </div>
@@ -28,8 +40,8 @@ export default function layout({ children }: { children: React.ReactNode }) {
           </div>
 
           <div>
-            <button className="bg-gray-800 px-10 py-2 rounded-md cursor-pointer hover:text-gray-200">
-              <Link href={'/auth/login'}>관리자 시스템 접속</Link>
+            <button className="bg-gray-800 px-20 py-2 rounded-md cursor-pointer hover:text-gray-200 mr-2">
+              <Link href={"/auth/register"}>관리자 시스템 접속</Link>
             </button>
           </div>
         </div>

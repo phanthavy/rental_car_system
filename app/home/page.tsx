@@ -2,9 +2,9 @@ import Link from "next/link";
 
 export default function page() {
   return (
-    <div className="grid grid-cols-6 h-screen">
+    <div className="grid grid-cols-6 h-screen relative">
       <div className="col-span-3 flex justify-center">
-        <h1 className="text-4xl mt-15 text-white">오토앤 종합 대차 플랫폼</h1>
+        <h1 className="text-5xl mt-15 text-white">오토앤 종합 대차 플랫폼</h1>
       </div>
       <div className="col-span-3 flex flex-col items-end justify-center gap-5">
         <div className="w-full h-40 grid grid-cols-2 text-center">

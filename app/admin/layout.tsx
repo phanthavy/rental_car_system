@@ -1,6 +1,12 @@
 import Sidebar from "@/components/Sidebar";
 
-export default function Layout({ children }: { children: React.ReactNode }) {
+
+export default function Layout({
+  children,
+}: {
+  children: React.ReactNode;
+}) {
+ 
   return (
     <div className="flex flex-col h-screen overflow-hidden">
       <header className="bg-green-700">
@@ -8,9 +14,7 @@ export default function Layout({ children }: { children: React.ReactNode }) {
       </header>
       <div className="flex">
         <Sidebar />
-        <main className="flex-1 overflow-y-auto p-4 border">
-          {children}
-        </main>
+        <main className="flex-1 overflow-y-auto p-4 border">{children}</main>
       </div>
     </div>
   );

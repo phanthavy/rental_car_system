@@ -1,19 +1,36 @@
+import Image from "next/image";
+import backgroundImg from "@/img/background.png";
+
 export default function layout({ children }: { children: React.ReactNode }) {
+
   return (
     <div className="flex flex-col text-white h-screen overflow-hidden">
-      <header className="bg-green-600">
-        <h1 className="text-2xl font-bold p-2">Auto & All About Mobility Life</h1>
+      <header>
+        <h1 className="text-2xl font-bold p-4 text-green-700">
+          Auto & All About Mobility Life
+        </h1>
       </header>
-      <main className="bg-gray-200 text-black flex-1">{children}</main>
-      <footer className="bg-green-600 p-2">
-        <div className="flex items-center">
-          <h1 className="text-lg font-bold border-r pl-2 pr-4">
+      <main className="bg-gray-600 text-black flex flex-col flex-1 h-full overflow-hidden relative">
+        <Image
+          src={backgroundImg}
+          alt={""}
+          fill
+          quality={75}
+          className="object-cover"
+          loading="eager"
+        />
+        <div className="absolute inset-0 bg-linear-to-b from-black/70 to-black/20"></div>
+        {children}
+      </main>
+      <footer>
+        <div className="flex items-center py-2">
+          <h1 className="text-lg font-bold border-r pl-2 pr-4 text-green-700">
             AutoLaoCompany
           </h1>
 
-          <div className="px-4 gap-8 flex-1">
+          <div className="px-4 gap-8 flex-1 text-black">
             <div className="flex gap-8">
-             <p>이용약관</p>
+              <p>이용약관</p>
               <p>개인정보 처리방침​</p>
             </div>
             <div className="flex gap-8">
