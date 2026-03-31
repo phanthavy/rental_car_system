@@ -15,8 +15,9 @@ export default function layout({ children }: { children: React.ReactNode }) {
           src={backgroundImg}
           alt={""}
           fill
-          quality={300}
+          quality={75}
           className="object-cover"
+          loading="eager"
         />
         <div className="absolute inset-0 bg-linear-to-b from-black/70 to-black/20"></div>
         {children}

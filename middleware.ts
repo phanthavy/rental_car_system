@@ -51,31 +51,31 @@ export async function middleware(req: NextRequest) {
     return NextResponse.redirect(new URL("/auth/login", req.url));
   }
 
-  try {
-    const payload = jwt.verify(
-      token,
-      process.env.SECRET_KEY || "default_secret",
-    ) as jwtpayloadtype;
+  // try {
+  //   const payload = jwt.verify(
+  //     token,
+  //     process.env.SECRET_KEY || "default_secret",
+  //   ) as jwtpayloadtype;
 
-    const pathname = req.nextUrl.pathname;
+  //   const pathname = req.nextUrl.pathname;
 
-    // ❌ block admin
-    if (pathname.startsWith("/admin") && payload.role !== Role.admin) {
-      return NextResponse.redirect(new URL("/auth/login", req.url));
-    }
+  //   // ❌ block admin
+  //   if (pathname.startsWith("/admin") && payload.role !== Role.admin) {
+  //     return NextResponse.redirect(new URL("/auth/login", req.url));
+  //   }
 
-    // ❌ block supplier
-    if (pathname.startsWith("/supplier") && payload.role !== Role.supplier) {
-      return NextResponse.redirect(new URL("/auth/login", req.url));
-    }
+  //   // ❌ block supplier
+  //   if (pathname.startsWith("/supplier") && payload.role !== Role.supplier) {
+  //     return NextResponse.redirect(new URL("/auth/login", req.url));
+  //   }
 
-    // ❌ block requester
-    if (pathname.startsWith("/requester") && payload.role !== Role.requester) {
-      return NextResponse.redirect(new URL("/auth/login", req.url));
-    }
-  } catch {
-    return NextResponse.redirect(new URL("/auth/login", req.url));
-  }
+  //   // ❌ block requester
+  //   if (pathname.startsWith("/requester") && payload.role !== Role.requester) {
+  //     return NextResponse.redirect(new URL("/auth/login", req.url));
+  //   }
+  // } catch {
+  //   return NextResponse.redirect(new URL("/auth/login", req.url));
+  // }
   return NextResponse.next();
 }
 

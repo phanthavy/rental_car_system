@@ -16,7 +16,7 @@ export default function page() {
 
           <div className="flex items-center justify-center bg-green-700">
             <Link
-              href={"/auth/register"}
+              href={"/auth/login"}
               className="text-white hover:text-gray-200 hover:underline"
             >
               대차 요청 시스템 접속​ 바로가기
@@ -30,7 +30,7 @@ export default function page() {
 
           <div className="flex items-center justify-center bg-green-700">
             <Link
-              href={"/auth/register"}
+              href={"/auth/login"}
               className="text-white hover:text-gray-200 hover:underline"
             >
               대차 공급 시스템 접속​ 바로가기​

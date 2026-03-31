@@ -1,15 +1,17 @@
 "use client";
 
 import { loginAction } from "@/app/aciton/action";
-import { useRouter } from "next/navigation";
+import { Role } from "@/libs/role";
+import { redirect, useRouter } from "next/navigation";
 import { useActionState } from "react";
 import { useEffect } from "react";
+import Swal from "sweetalert2";
 
 type FormState = {
   error?: string;
   success?: string;
   user?: { id: number; username: string; role: string };
-  token?: string
+  token?: string;
 };
 
 export default function LoginPage() {
@@ -17,21 +19,25 @@ export default function LoginPage() {
     loginAction,
     {},
   );
+
   const router = useRouter();
 
   useEffect(() => {
-    if (!state.user) return;
-
-    switch (state.user.role) {
-      case "admin":
-        router.push("/admin/home");
-        break;
-      case "supplier":
-        router.push("/supplier/supplierHome");
-        break;
-      case "requester":
-        router.push("/requester/requesterHome");
-        break;
+    if (state.user) {
+      Swal.fire({
+        title: "Log in successful",
+        icon: "success",
+        timer: 2000,
+        showConfirmButton: false,
+      }).then(() => {
+        if (state.user?.role === Role.admin) {
+          redirect("/admin/home");
+        } else if (state.user?.role === Role.supplier) {
+          redirect("/supplier/supplierHome");
+        } else if (state.user?.role === Role.requester) {
+          redirect("/requester/requesterHome");
+        }
+      });
     }
   }, [state.user, router]);
 
@@ -46,6 +52,9 @@ export default function LoginPage() {
         </div>
         <div className="bg-white w-100 p-10 rounded-2xl">
           <form action={formAction}>
+            <div>
+              <h1 className="mb-4 text-center">Login</h1>
+            </div>
             <div className="flex flex-col gap-3">
               <input
                 name="username"
@@ -72,7 +81,7 @@ export default function LoginPage() {
                 type="submit"
                 className="bg-gray-800 w-full py-2 text-white rounded-md"
               >
-                로그인​
+                {pending ? "loading..." : "로그인​"}
               </button>
             </div>
           </form>

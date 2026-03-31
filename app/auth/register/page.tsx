@@ -1,7 +1,8 @@
 "use client";
 
 import { registerAction } from "@/app/aciton/action";
-import { useActionState } from "react";
+import { useActionState} from "react";
+;
 
 type FormSate = {
   error?: string;
@@ -13,7 +14,7 @@ export default function RegisterPage() {
     registerAction,
     {},
   );
-  
+
   return (
     <div className="flex items-center justify-center h-full relative">
       <div>
@@ -25,6 +26,9 @@ export default function RegisterPage() {
         </div>
         <div className="bg-white w-100 p-10 rounded-2xl">
           <form action={formAction}>
+            <div>
+              <h1 className="text-center mb-4">Register</h1>
+            </div>
             <div className="flex flex-col gap-3">
               <input
                 name="username"
@@ -42,7 +46,9 @@ export default function RegisterPage() {
                 name="role"
                 className="border border-gray-400 rounded-md p-2"
               >
-                <option value="" disabled>select role</option>
+                <option value="" disabled>
+                  select role
+                </option>
                 <option value="admin">admin</option>
                 <option value="supplier">supplier</option>
                 <option value="requester">requester</option>
@@ -60,7 +66,7 @@ export default function RegisterPage() {
                 type="submit"
                 className="bg-gray-800 w-full py-2 text-white rounded-md"
               >
-                로그인​
+                {pending ? "Loading..." : "로그인​"}
               </button>
             </div>
             <div className="mt-5 text-gray-500 underline">

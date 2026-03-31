@@ -6,10 +6,15 @@ import { useState } from "react";
 export default function Sidebar() {
   const pathname = usePathname();
 
-  const [OpenAccount, setOpenAccount] = useState(false);
-  
+  const handleLogut = async () => {
+    await fetch("/api/logout", {
+      method: "POST",
+    });
+    window.location.href = "/auth/login";
+  };
+
   return (
-    <aside className="w-64 bg-green-700 text-white h-screen">
+    <aside className="w-64 bg-green-700 text-white h-screen flex flex-col overflow-hidden">
       <h2 className="mb-4 text-lg px-2 py-5">Admin : ...</h2>
 
       <ul className="space-y-2">
@@ -34,11 +39,15 @@ export default function Sidebar() {
         </li>
         {/* account setting */}
         <li>
-          <button className="">
-            Account setting
-          </button>
+          <button className="">Account setting</button>
         </li>
       </ul>
+      <button
+        onClick={handleLogut}
+        className="mt-150 bg-white text-black cursor-pointer"
+      >
+        Log out
+      </button>
     </aside>
   );
 }
