@@ -42,6 +42,7 @@ export async function registerAction(prev: any, formData: FormData) {
       username: username,
       password: hashed,
       role: roless,
+      mustResetPassword: true,
     },
   });
 
@@ -54,7 +55,7 @@ type FormState = {
   success?: string;
   user?: { id: number; username: string; role: string };
   token?: string;
-  mustResetPassword?: boolean;
+  mustReset?: boolean;
 };
 
 export async function loginAction(
@@ -88,6 +89,7 @@ export async function loginAction(
   };
 
   const token = signToken(payload);
+
   const cookiesStore = await cookies();
 
   cookiesStore.set({
@@ -103,7 +105,19 @@ export async function loginAction(
     httpOnly: true,
   });
 
-  return { success: "Login success", user: payload, token };
+  cookiesStore.set({
+    name: "mustResetPassword",
+    value: String(user.mustResetPassword),
+    path: "/",
+    httpOnly: true,
+  });
+
+  return {
+    success: "Login success",
+    user: payload,
+    token,
+    mustReset: user.mustResetPassword,
+  };
 }
 
 // ----------------------------------------------------------

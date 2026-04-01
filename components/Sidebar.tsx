@@ -1,7 +1,7 @@
 "use client";
+
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-import { useState } from "react";
 
 export default function Sidebar() {
   const pathname = usePathname();
@@ -12,9 +12,9 @@ export default function Sidebar() {
     });
     window.location.href = "/auth/login";
   };
-
+  
   return (
-    <aside className="w-64 bg-green-700 text-white h-screen flex flex-col overflow-hidden">
+    <aside className="w-64 bg-[#007934] text-white h-screen flex flex-col overflow-hidden">
       <h2 className="mb-4 text-lg px-2 py-5">Admin : ...</h2>
 
       <ul className="space-y-2">

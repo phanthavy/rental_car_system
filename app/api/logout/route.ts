@@ -6,6 +6,7 @@ export async function POST() {
 
   (await cookieStore).delete("userId");
   (await cookieStore).delete("token");
+  (await cookieStore).delete("mustResetPassword");
 
   return NextResponse.json({ message: "logout success" });
 }

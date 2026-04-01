@@ -2,6 +2,7 @@
 
 import { registerAction } from "@/app/aciton/action";
 import { useActionState} from "react";
+import Swal from "sweetalert2";
 ;
 
 type FormSate = {
@@ -14,7 +15,7 @@ export default function RegisterPage() {
     registerAction,
     {},
   );
-
+  
   return (
     <div className="flex items-center justify-center h-full relative">
       <div>
@@ -46,7 +47,7 @@ export default function RegisterPage() {
                 name="role"
                 className="border border-gray-400 rounded-md p-2"
               >
-                <option value="" disabled>
+                <option>
                   select role
                 </option>
                 <option value="admin">admin</option>

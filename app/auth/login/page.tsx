@@ -1,9 +1,10 @@
 "use client";
 
 import { loginAction } from "@/app/aciton/action";
+import PopupResetPassword from "@/components/PopupResetPassword";
 import { Role } from "@/libs/role";
-import { redirect, useRouter } from "next/navigation";
-import { useActionState } from "react";
+import { useRouter } from "next/navigation";
+import { useActionState, useState } from "react";
 import { useEffect } from "react";
 import Swal from "sweetalert2";
 
@@ -12,6 +13,7 @@ type FormState = {
   success?: string;
   user?: { id: number; username: string; role: string };
   token?: string;
+  mustReset?: boolean;
 };
 
 export default function LoginPage() {
@@ -19,7 +21,7 @@ export default function LoginPage() {
     loginAction,
     {},
   );
-
+  const [showResetPopup, setShowResetPopup] = useState(false);
   const router = useRouter();
 
   useEffect(() => {
@@ -30,19 +32,25 @@ export default function LoginPage() {
         timer: 2000,
         showConfirmButton: false,
       }).then(() => {
+        if (state.mustReset) {
+          setShowResetPopup(true);
+          return;
+        }
+
         if (state.user?.role === Role.admin) {
-          redirect("/admin/home");
-        } else if (state.user?.role === Role.supplier) {
-          redirect("/supplier/supplierHome");
+          router.push("/admin/home");
         } else if (state.user?.role === Role.requester) {
-          redirect("/requester/requesterHome");
+          router.push("/requester/requesterHome");
+        } else if (state.user?.role === Role.supplier) {
+          router.push("/supplier/supplierHome");
         }
       });
     }
-  }, [state.user, router]);
+  }, [state.user, router, state.mustReset]);
 
   return (
     <div className="flex items-center justify-center h-full relative">
+      {showResetPopup && <PopupResetPassword />}
       <div>
         <div className="mb-20">
           <h1 className="text-center text-3xl text-white">
@@ -83,6 +91,14 @@ export default function LoginPage() {
               >
                 {pending ? "loading..." : "로그인​"}
               </button>
+            </div>
+            <div className="mt-5 text-gray-500 underline">
+              <p>
+                No account yet?{" "}
+                <a href="/auth/register" className="hover:text-gray-600">
+                  Register
+                </a>
+              </p>
             </div>
           </form>
         </div>
